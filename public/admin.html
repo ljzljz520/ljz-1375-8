@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理端 · 湿地鸟类民俗节</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-side">
+    <h2>管理端</h2>
+    <div style="margin-bottom:10px">
+      <input id="token" type="password" placeholder="管理员令牌" style="margin-bottom:6px">
+      <button class="btn small" id="save-token">保存令牌</button>
+    </div>
+    <div id="ver" class="disc" style="color:#bfe3d8"></div>
+    <hr>
+    <button data-view="sites" class="active">观测点</button>
+    <button data-view="zones">限制区</button>
+    <button data-view="species">物种同名订正</button>
+    <button data-view="events">仪式 / 亲子活动</button>
+    <button data-view="bulletins">公告与有效区间</button>
+    <button data-view="records">观测记录（精坐标）</button>
+    <button data-view="images">图片与元数据</button>
+    <button data-view="misc">分类 / 潮汐 / 鸟讯</button>
+  </aside>
+  <main class="admin-main">
+    <div id="bar" style="margin-bottom:10px;display:flex;gap:8px;align-items:center">
+      <button class="btn" id="refresh">刷新</button>
+      <button class="btn" id="demo-late-zone">演练：晚到新规（覆盖潮沟草滩观察点）</button>
+      <a class="btn" id="export-public" href="/api/export/observations.csv">公开导出 CSV</a>
+      <a class="btn" id="export-admin" href="#">管理端 CSV（精坐标）</a>
+      <span id="now-label" class="disc"></span>
+    </div>
+    <div id="view"></div>
+  </main>
+</div>
+<div id="toast"></div>
+<script src="/admin.js"></script>
+</body>
+</html>

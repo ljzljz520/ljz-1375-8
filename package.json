@@ -1,0 +1,15 @@
+{
+  "name": "wetland-bird-festival",
+  "version": "1.0.0",
+  "description": "湿地鸟类民俗节专题：访客页（鸟类/仪式/亲子活动）、管理端（观测点/限制区）、敏感坐标保护与限制区实时过滤",
+  "type": "module",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "express": "^4.21.0"
+  }
+}

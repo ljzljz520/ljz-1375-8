@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>沧澜湾湿地鸟类民俗节</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/styles.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1 data-i18n="title">沧澜湾湿地鸟类民俗节</h1>
+    <p class="sub" data-i18n="subtitle">鸟类 · 民俗仪式 · 亲子活动</p>
+  </div>
+  <div class="top-actions">
+    <span id="version-badge" class="badge" title="地图、文本与打印卡同版发布"></span>
+    <button id="lang-toggle" class="btn">EN</button>
+  </div>
+</header>
+
+<div id="offline-banner" class="banner warn hidden" data-i18n="offlineWarn">
+  离线：以下为旧计划，限制区可能已调整，点位或已禁止进入；联网前请勿据此前往。
+</div>
+<div id="stale-banner" class="banner warn hidden" data-i18n="staleWarn">
+  内容版本已更新，正在刷新地图、文本与打印卡…
+</div>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-tab="birds" data-i18n="tabBirds">鸟类</button>
+  <button class="tab" data-tab="rituals" data-i18n="tabRituals">民俗仪式</button>
+  <button class="tab" data-tab="family" data-i18n="tabFamily">亲子活动</button>
+</nav>
+
+<main class="layout">
+  <section class="panel">
+    <h2 id="list-title"></h2>
+    <div id="content-list" class="cards"></div>
+
+    <h3 data-i18n="bulletins">公告</h3>
+    <div id="bulletins"></div>
+
+    <div class="src-block">
+      <h3 data-i18n="tides">潮汐参考（跨日已标注）</h3>
+      <p class="disc" id="tide-disc"></p>
+      <div id="tides"></div>
+    </div>
+    <div class="src-block">
+      <h3 data-i18n="birdnews">鸟讯（来源材料）</h3>
+      <p class="disc" id="news-disc"></p>
+      <div id="birdnews"></div>
+    </div>
+  </section>
+
+  <section class="mapwrap">
+    <div id="map"></div>
+    <div id="map-fallback" class="hidden"></div>
+    <div class="map-foot">
+      <span id="map-status" class="disc"></span>
+      <button class="btn small" id="print-selected" data-i18n="printCard">打印选中点卡片</button>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="footer-disc"></footer>
+
+<script type="module" src="/app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
+</script>
+</body>
+</html>
