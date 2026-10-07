@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>湿地节管理端</title><style>
+body{font-family:system-ui;margin:20px;background:#f6f8f7}section{background:#fff;border:1px solid #bbb;border-radius:10px;padding:14px;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border:1px solid #ddd;padding:6px;text-align:left;vertical-align:top}
+input,textarea,select{width:100%;box-sizing:border-box;margin:4px 0}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{background:#175e48;color:#fff;border:0;border-radius:6px;padding:8px 10px;cursor:pointer;margin:3px}.danger{background:#8b2a1a}
+pre{white-space:pre-wrap;max-height:240px;overflow:auto;background:#f2f2f2;padding:8px}.ok{color:#175e48}.bad{color:#8b2a1a}</style></head>
+<body><h1>湿地鸟类民俗节管理端</h1>
+<label>管理令牌 <input id="token" value="dev-admin-token"></label> <span id="status"></span>
+<section><h2>观测点（公开几何 / 敏感精确几何分开）</h2><div id="points"></div>
+<h3>新增 / 编辑观测点</h3><input id="pId" placeholder="编辑ID（留空为新增）" style="max-width:220px"><div class="grid2">
+<input id="pSlug" placeholder="slug"><input id="pArea" placeholder="行政区域名称（仅备注）">
+<textarea id="pPublic" rows="4" placeholder="public Point GeoJSON"></textarea><textarea id="pSensitive" rows="4" placeholder="sensitive Point GeoJSON，绝不公开"></textarea>
+<input id="pNameZh" placeholder="中文名"><input id="pNameEn" placeholder="English name">
+<input id="pNoteZh" placeholder="中文通行说明"><input id="pNoteEn" placeholder="English access note">
+</div><label><input type="checkbox" id="pSensitiveFlag" style="width:auto"> 敏感栖息地</label><button onclick="createPoint()">保存观测点并发布</button></section>
+<section><h2>限制区（多边形、有效区间；迟到规则立即 bump）</h2><div id="zones"></div>
+<h3>新增 / 编辑限制区</h3><input id="zId" placeholder="编辑ID（留空为新增）" style="max-width:220px"><div class="grid2">
+<input id="zSlug" placeholder="slug"><input id="zArea" placeholder="行政区域（仅备注，不参与判定）">
+<textarea id="zGeometry" rows="7" placeholder="Polygon GeoJSON"></textarea><div>
+<input id="zStart" placeholder="effectiveStart ISO"><input id="zEnd" placeholder="effectiveEnd ISO">
+<input id="zReceived" placeholder="receivedAt ISO，可晚到"><input id="zSource" placeholder="source">
+<input id="zNameZh" placeholder="中文名"><input id="zNameEn" placeholder="English name">
+<input id="zReasonZh" placeholder="中文原因"><input id="zReasonEn" placeholder="English reason"></div>
+</div><button onclick="createZone()">保存限制区并全渠道失效</button></section>
+<section><h2>观测记录（管理端可见精确几何）</h2><div id="records"></div></section>
+<section><h2>同名物种订正</h2><div class="grid2"><input id="reportId" placeholder="bird report id"><input id="oldLabel" placeholder="旧名/同名俗名"></div>
+<div class="grid2"><input id="speciesSlug" placeholder="accepted species slug（推荐）"><input id="basis" placeholder="订正依据"></div>
+<button onclick="correctSpecies()">按科学名/slug 订正</button></section>
+<section><h2>图片：多种鸟 + 剥离定位</h2><div class="grid2"><input id="iUrl" placeholder="/uploads/..."><input id="iReportId" placeholder="report id"><input id="iSpeciesIds" placeholder="species ids 逗号分隔，可多个"><input id="iAltZh" placeholder="中文 alt"><input id="iAltEn" placeholder="English alt"></div><button onclick="createImage()">保存安全图片</button></section>
+<section><h2>活动改期</h2><div class="grid2"><input id="eId" placeholder="event id"><input id="eReason" placeholder="reason"><input id="eStart" placeholder="new start ISO"><input id="eEnd" placeholder="new end ISO"></div><button onclick="reschedule()">改期并 bump</button></section>
+<script src="/admin.js"></script></body></html>

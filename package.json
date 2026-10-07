@@ -1,0 +1,16 @@
+{
+  "name": "wetland-bird-folklore-festival",
+  "version": "1.0.0",
+  "description": "湿地鸟类民俗节专题：多语言访客端、几何限制区实时过滤与安全导出",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2"
+  }
+}

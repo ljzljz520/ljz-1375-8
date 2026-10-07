@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>湿地鸟类民俗节</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <style>
+    :root { color-scheme: light; --green:#175e48; --pale:#e9f4ee; --amber:#8a5a00; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+    body { margin:0; background:#f7faf7; color:#18241f; }
+    header { background:var(--green); color:#fff; padding:16px 20px; }
+    header h1 { margin:0 0 6px; font-size:24px; }
+    .meta { opacity:.9; font-size:13px; }
+    main { max-width:1120px; margin:0 auto; padding:16px; }
+    .toolbar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:12px 0; }
+    button, .button { border:1px solid var(--green); background:#fff; color:var(--green); padding:8px 12px; border-radius:8px; cursor:pointer; text-decoration:none; font:inherit; }
+    button.active, button[aria-selected="true"] { background:var(--green); color:#fff; }
+    .grid { display:grid; grid-template-columns: minmax(0,1.2fr) minmax(300px,.8fr); gap:16px; }
+    .panel { background:white; border:1px solid #cbd8cf; border-radius:12px; padding:14px; margin-bottom:16px; }
+    .panel h2 { margin-top:0; }
+    #map { width:100%; height:360px; border-radius:10px; background:#dcefed; border:1px solid #b7d3c4; }
+    .dot { fill:#0c6b4b; stroke:white; stroke-width:2; cursor:pointer; }
+    .dot:focus, .dot:hover { fill:#d56b00; }
+    .notice { border-left:4px solid #c47f00; background:#fff8e6; padding:10px; margin:8px 0; }
+    .warning { background:#fff1e8; border-color:#b34b1a; }
+    .card { border:1px solid #d5ded8; border-radius:10px; padding:10px; margin:8px 0; }
+    .card h3 { margin:0 0 6px; }
+    .muted { color:#5d6b63; font-size:13px; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; background:var(--pale); color:var(--green); font-size:12px; margin-right:4px; }
+    img.photo { max-width:100%; border-radius:8px; border:1px solid #cbd8cf; }
+    #staleBar { display:none; background:#7a280c; color:white; padding:10px; }
+    @media (max-width: 800px) { .grid { grid-template-columns:1fr; } }
+    @media print { header, .toolbar, #staleBar { display:none; } body{background:white;} .panel{break-inside:avoid;border-color:#999;} }
+  </style>
+</head>
+<body>
+  <div id="staleBar"></div>
+  <header>
+    <h1 data-i18n="title">湿地鸟类民俗节</h1>
+    <div class="meta"><span id="releaseMeta"></span></div>
+  </header>
+  <main>
+    <div class="toolbar" role="tablist" aria-label="专题切换">
+      <button id="tab-bird" aria-selected="true" data-tab="bird">鸟类</button>
+      <button id="tab-ritual" aria-selected="false" data-tab="ritual">仪式</button>
+      <button id="tab-family" aria-selected="false" data-tab="family">亲子活动</button>
+      <span style="flex:1"></span>
+      <button id="langZh">中文</button><button id="langEn">English</button>
+      <a class="button" id="printLink" href="/print" target="_blank">打印卡</a>
+      <button id="exportBtn">CSV 导出</button>
+    </div>
+    <div id="offlineWarning" class="notice warning" hidden></div>
+    <div class="grid">
+      <section>
+        <div id="mapPanel" class="panel">
+          <h2 data-i18n="mapTitle">同期发布地图</h2>
+          <svg id="map" viewBox="120.05 32.05 0.32 0.22" role="img" aria-label="公开观测点地图"></svg>
+          <p class="muted" data-i18n="mapNote">只绘制已通过限制区实时几何过滤的公开点位；不绘制限制区边界。</p>
+        </div>
+        <div id="contentPanel" class="panel" tabindex="0" aria-live="polite"></div>
+      </section>
+      <aside>
+        <div class="panel">
+          <h2 data-i18n="notices">公告与有效区间</h2>
+          <div id="notices"></div>
+        </div>
+        <div class="panel">
+          <h2 data-i18n="sources">鸟讯与潮汐</h2>
+          <div id="sources"></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
